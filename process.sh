@@ -17,4 +17,4 @@ ogr2ogr -f CSV -select "pcd,doterm,oscty,ced,oslaua,osward,oseast1m,osnrth1m,osg
 gpq convert data/msoas-filtered.geojson data/msoas.parquet
 gpq convert data/lsoas-filtered.geojson data/lsoas.parquet
 
-duckdb -c "COPY(SELECT * FROM read_csv('data/ons-postcode-directory-filtered.csv', columns={'ru11ind': 'VARCHAR'})) TO 'data/ons-postcode-directory-filtered.parquet';"
+duckdb -c "COPY(SELECT * FROM read_csv('data/ons-postcode-directory-filtered.csv', columns={'ru11ind': 'VARCHAR'})) TO 'data/ons-postcode-directory.parquet';"

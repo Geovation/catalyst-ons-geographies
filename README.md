@@ -21,3 +21,25 @@ brew install planetlabs/gpq
 ```bash
 brew install gdal
 ```
+
+## Data scripts
+
+Census boundaries and ONS postcode directory are downloaded from the ONS Geoportal.
+
+```bash
+./download.sh
+```
+
+When the downloads are down the data is processe to create a number of geoparquet files.
+
+```bash
+./process.sh
+```
+
+## Using the database
+
+With duckdb installed the database can be launched:
+
+```
+duckdb
+```
