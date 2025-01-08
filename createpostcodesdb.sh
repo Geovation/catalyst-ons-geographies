@@ -1,0 +1,1 @@
+duckdb ons_postcodes.duckdb -c ".read createpostcodesdb.sql"

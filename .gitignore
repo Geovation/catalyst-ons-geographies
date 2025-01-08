@@ -172,3 +172,5 @@ data/msoas-filtered.geojson
 data/ons-postcode-directory.zip
 data/ons-postcode-directory.csv
 data/ons-postcode-directory-filtered.csv
+
+ons_postcodes.duckdb
