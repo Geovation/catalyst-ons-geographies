@@ -1,10 +1,12 @@
 # ONS Geography Library
 
-This is a repository for storing and querying ONS geographies within geoparquet file format and importing into a DuckDB database.
+This is a repository for storing and querying Office for National Statistics geographies within the geoparquet file format and importing into a DuckDB database.
 
 ## Introduction
 
-DuckDB is a fast in-process database system. It is designed for analytical workloads and can be used as a library in other applications. We are compiling a number of scripts to easily import ONS geographies into DuckDB, where they will then be able to be embedded in applications.
+[DuckDB](https://duckdb.org/) is a fast in-process database system. It is designed for analytical workloads and can be used as a library in other applications. We are compiling a number of scripts to import ONS geographies into DuckDB, where they will then be available to embed in applications.
+
+The end goal will be to quickly be able to generate a duckdb database file (or multiple files) that can be used to query ONS geographies.
 
 ## Setup
 
@@ -32,7 +34,7 @@ When the downloads are done the data is processed to create a number of geoparqu
 ./process.sh
 ```
 
-These are pregenerated as part of this repository and can be found in the `data` directory.
+These are pregenerated as part of this repository, and can be found in the `data` directory.
 
 - `lsoas.parquet` - Lower Super Output Areas
 - `msoas.parquet` - Middle Super Output Areas
@@ -48,7 +50,13 @@ The geoparquet files can be imported into DuckDB using a shell script.
 
 This creates a file named `ons_postcodes.duckdb` which can be used to query the data.
 
-## Database
+## Release
+
+When this repository is released the duckdb database file will be added to the release page as a build item, so there is no need to run the above commands if you simply want the database file.
+
+See the [releases page](https://github.com/Geovation/catalyst-ons-geographies/releases) for the latest release.
+
+## Usage
 
 With duckdb installed the database can be launched:
 
@@ -69,20 +77,20 @@ The database can be queried using SQL.
 Find the postcode for a given point:
 
 ```sql
-SELECT pcd, imd
+SELECT postcode, date_of_termination, county_code,county_electoral_division_code, local_authority_district_code,ward_code, easting, northing, country_code, region_code, westminster_parliamentary_constituency_code, output_area_11_code, lower_super_output_area_11_code, middle_super_output_area_11_code, built_up_area_24_code, rural_urban_11_code, index_multiple_deprivation_rank, output_area_21_code, lower_super_output_area_21_code, middle_super_output_area_21_code, longitude, latitude
 FROM(
   SELECT
     st_distance(ST_Point(-2.250, 51.346), geometry) as distance,
     *
   FROM postcodes
   WHERE ST_Within(geometry, ST_Buffer(ST_Point(-2.250, 51.346), 0.01))
-  AND doterm IS NULL
+  AND date_of_termination IS NULL
   ORDER BY distance ASC LIMIT 1);
 ```
 
 Find the postcode for a given postcode:
 
 ```sql
-SELECT pcd, imd
-FROM postcodes where replace(pcd, ' ', '') = 'BA151DS';
+SELECT postcode, date_of_termination, county_code,county_electoral_division_code, local_authority_district_code,ward_code, easting, northing, country_code, region_code, westminster_parliamentary_constituency_code, output_area_11_code, lower_super_output_area_11_code, middle_super_output_area_11_code, built_up_area_24_code, rural_urban_11_code, index_multiple_deprivation_rank, output_area_21_code, lower_super_output_area_21_code, middle_super_output_area_21_code, longitude, latitude
+FROM postcodes where replace(postcode, ' ', '') = 'BA151DS';
 ```
