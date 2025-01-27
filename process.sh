@@ -4,6 +4,38 @@
 unzip data/ons-postcode-directory.zip "Data/ONSPD_*.csv"
 mv data/ONSPD_*.csv data/ons-postcode-directory.csv
 
+# Unzip the country codes lookup file
+unzip data/ons-postcode-directory.zip "Documents/Country names and codes*.csv"
+mv Documents/Country\ names\ and\ codes*.csv data/country-codes.csv
+
+# Unzip the BUA24 names and codes EW as at 04_24.csv
+unzip data/ons-postcode-directory.zip "Documents/BUA24 names and codes*.csv"
+mv Documents/BUA24\ names\ and\ codes*.csv data/bua24-codes.csv
+
+# Unzip the County Electoral Division names and codes EN as at 05_23.csv
+unzip data/ons-postcode-directory.zip "Documents/County Electoral Division names and codes*.csv"
+mv Documents/County\ Electoral\ Division\ names\ and\ codes*.csv data/ced-codes.csv
+
+# Unzip the LA_UA names and codes UK as at 04_23.csv
+unzip data/ons-postcode-directory.zip "Documents/LA_UA names and codes*.csv"
+mv Documents/LA_UA\ names\ and\ codes*.csv data/la-ua-codes.csv
+
+# Unzip the Region names and codes EN as at 12_20 (RGN).csv
+unzip data/ons-postcode-directory.zip "Documents/Region names and codes*.csv"
+mv Documents/Region\ names\ and\ codes*.csv data/region-codes.csv
+
+# Unzip data/ons-postcode-directory/Documents/Rural Urban (2011) Indicator names and codes GB as at 12_16.csv
+unzip data/ons-postcode-directory.zip "Documents/Rural Urban (2011) Indicator names and codes*.csv"
+mv Documents/Rural\ Urban\ \(2011\)\ Indicator\ names\ and\ codes*.csv data/ru11-codes.csv
+
+# Unzip the Ward names and codes UK as at 05_21.csv
+unzip data/ons-postcode-directory.zip "Documents/Ward names and codes*.csv"
+mv Documents/Ward\ names\ and\ codes*.csv data/ward-codes.csv
+
+# Unzip the Westminster Parliamentary Constituency names and codes UK as at 05_23.csv
+unzip data/ons-postcode-directory.zip "Documents/Westminster Parliamentary Constituency names and codes*.csv"
+mv Documents/Westminster\ Parliamentary\ Constituency\ names\ and\ codes*.csv data/pcon-codes.csv
+
 # Filter the MSOA boundary data to only include the msoa21cd field
 ogr2ogr -f GeoJSON -select "msoa21cd" data/msoas-filtered.geojson data/msoas.geojson
 
