@@ -52,7 +52,7 @@ ogr2ogr -f CSV -select "pcd,doterm,oscty,ced,oslaua,osward,oseast1m,osnrth1m,osg
 # Filter the BUA24 codes lookup to only include the fields we will be using
 ogr2ogr -f CSV -select "BUA24CD,BUA24NM" data/bua24-codes-filtered.csv data/bua24-codes.csv
 
-# Filter the country codes lookup to only include the fields we will be using
+# Filter the Country codes lookup to only include the fields we will be using
 ogr2ogr -f CSV -select "CTRY12CD,CTRY12NM" data/country-codes-filtered.csv data/country-codes.csv
 
 # Filter the County codes lookup to only include the fields we will be using
