@@ -73,8 +73,29 @@ ogr2ogr -f CSV -select "PCON24CD,PCON24NM" data/pcon-codes-filtered.csv data/pco
 gpq convert data/msoas-filtered.geojson data/msoas.parquet
 gpq convert data/lsoas-filtered.geojson data/lsoas.parquet
 
-# Load the ONS postcode directory into DuckDB
+# Load the ONS postcode directory to Parquet
 duckdb -c "COPY(SELECT * FROM read_csv('data/ons-postcode-directory-filtered.csv', types={'ru11ind': 'VARCHAR'})) TO 'data/ons-postcode-directory.parquet';"
 
-# Load the country codes lookup into DuckDB
-duckdb -c "COPY(SELECT * FROM read_csv('data/country-codes.csv')) TO 'data/country-codes.parquet';"
+# Load the country codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/country-codes-filtered.csv')) TO 'data/country-codes.parquet';"
+
+# Load the BUA24 codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/bua24-codes-filtered.csv')) TO 'data/bua24-codes.parquet';"
+
+# Load the County Electoral Division codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/ced-codes-filtered.csv')) TO 'data/ced-codes.parquet';"
+
+# Load the LA_UA codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/la-ua-codes-filtered.csv')) TO 'data/la-ua-codes.parquet';"
+
+# Load the Region codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/region-codes-filtered.csv')) TO 'data/region-codes.parquet';"
+
+# Load the Rural Urban (2011) Indicator codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/ru11-codes-filtered.csv')) TO 'data/ru11-codes.parquet';"
+
+# Load the Ward codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/ward-codes-filtered.csv')) TO 'data/ward-codes.parquet';"
+
+# Load the Westminster Parliamentary Constituency codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/pcon-codes-filtered.csv')) TO 'data/pcon-codes.parquet';"
