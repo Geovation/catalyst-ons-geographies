@@ -4,13 +4,17 @@
 unzip data/ons-postcode-directory.zip "Data/ONSPD_*.csv"
 mv data/ONSPD_*.csv data/ons-postcode-directory.csv
 
-# Unzip the country codes lookup file
-unzip data/ons-postcode-directory.zip "Documents/Country names and codes*.csv"
-mv Documents/Country\ names\ and\ codes*.csv data/country-codes.csv
-
 # Unzip the BUA24 names and codes
 unzip data/ons-postcode-directory.zip "Documents/BUA24 names and codes*.csv"
 mv Documents/BUA24\ names\ and\ codes*.csv data/bua24-codes.csv
+
+# Unzip the Country codes lookup file
+unzip data/ons-postcode-directory.zip "Documents/Country names and codes*.csv"
+mv Documents/Country\ names\ and\ codes*.csv data/country-codes.csv
+
+# Unzip the County names and codes
+unzip data/ons-postcode-directory.zip "Documents/County names and codes*.csv"
+mv Documents/County\ names\ and\ codes*.csv data/county-codes.csv
 
 # Unzip the County Electoral Division names and codes
 unzip data/ons-postcode-directory.zip "Documents/County Electoral Division names and codes*.csv"
@@ -45,11 +49,14 @@ ogr2ogr -f GeoJSON -select "lsoa21cd" data/lsoas-filtered.geojson data/lsoas.geo
 # Filter the ONS postcode directory to only include the fields we will be using
 ogr2ogr -f CSV -select "pcd,doterm,oscty,ced,oslaua,osward,oseast1m,osnrth1m,osgrdind,ctry,rgn,pcon,oa11,lsoa11,msoa11,bua24,ru11ind,imd,oa21,lsoa21,msoa21,lat,long" data/ons-postcode-directory-filtered.csv data/ons-postcode-directory.csv
 
+# Filter the BUA24 codes lookup to only include the fields we will be using
+ogr2ogr -f CSV -select "BUA24CD,BUA24NM" data/bua24-codes-filtered.csv data/bua24-codes.csv
+
 # Filter the country codes lookup to only include the fields we will be using
 ogr2ogr -f CSV -select "CTRY12CD,CTRY12NM" data/country-codes-filtered.csv data/country-codes.csv
 
-# Filter the BUA24 codes lookup to only include the fields we will be using
-ogr2ogr -f CSV -select "BUA24CD,BUA24NM" data/bua24-codes-filtered.csv data/bua24-codes.csv
+# Filter the County codes lookup to only include the fields we will be using
+ogr2ogr -f CSV -select "CTY23CD,CTY23NM" data/county-codes-filtered.csv data/county-codes.csv
 
 # Filter the County Electoral Division codes lookup to only include the fields we will be using
 ogr2ogr -f CSV -select "CED23CD,CED23NM" data/ced-codes-filtered.csv data/ced-codes.csv
@@ -76,11 +83,14 @@ gpq convert data/lsoas-filtered.geojson data/lsoas.parquet
 # Load the ONS postcode directory to Parquet
 duckdb -c "COPY(SELECT * FROM read_csv('data/ons-postcode-directory-filtered.csv', types={'ru11ind': 'VARCHAR'})) TO 'data/ons-postcode-directory.parquet';"
 
+# Load the BUA24 codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/bua24-codes-filtered.csv')) TO 'data/bua24-codes.parquet';"
+
 # Load the country codes lookup to Parquet
 duckdb -c "COPY(SELECT * FROM read_csv('data/country-codes-filtered.csv')) TO 'data/country-codes.parquet';"
 
-# Load the BUA24 codes lookup to Parquet
-duckdb -c "COPY(SELECT * FROM read_csv('data/bua24-codes-filtered.csv')) TO 'data/bua24-codes.parquet';"
+# Load the County codes lookup to Parquet
+duckdb -c "COPY(SELECT * FROM read_csv('data/county-codes-filtered.csv')) TO 'data/county-codes.parquet';"
 
 # Load the County Electoral Division codes lookup to Parquet
 duckdb -c "COPY(SELECT * FROM read_csv('data/ced-codes-filtered.csv')) TO 'data/ced-codes.parquet';"
