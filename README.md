@@ -74,7 +74,7 @@ LOAD spatial;
 
 The database can be queried using SQL.
 
-Find the postcode data for a given postcode:
+#### Find a postcode
 
 ```sql
 SELECT * FROM vw_postcodes where replace(postcode, ' ', '') = 'BA151DS';
@@ -85,7 +85,39 @@ The results of the above query would be:
 | Column Name | Value |
 | --- | --- |
 | postcode | BA15 1DS |
+| date_of_termination | |
+| county_code | E99999999 |
+| county_name | (pseudo) England (UA/MD/LB) |
+| county_electoral_division_code | E99999999
+| county_electoral_division_name | | 
+| local_authority_district_code | E06000054 |
+| local_authority_district_name | Wiltshire |
+| ward_code | E05013407 |
+| ward_name | Bradford-on-Avon South |
+| easting | 382678 |
+| northing | 160818 |
+| country_code | E92000001 |
+| country_name | England |
+| region_code | E12000009 |
+| region_name | South West |
+| westminster_parliamentary_constituency_code | E14001356 |
+| westminster_parliamentary_constituency_name | Melksham and Devizes |
+| output_area_11_code | E00163467 |
+| lower_super_output_area_11_code | E01032050 |
+| middle_super_output_area_11_code | E02006682 |
+| built_up_area_24_code | E63012462 |
+| built_up_area_name | Bradford-on-Avon |
+| rural_urban_11_code | D1 |
+| rural_urban_11_name | (England/Wales) Rural town and fringe |
+| index_multiple_deprivation_rank | 27325 |
+| output_area_21_code | E00163467 |
+| lower_super_output_area_21_code | E01034532 |
+| middle_super_output_area_21_code | E02006682 |
+| longitude | -2.250094 |
+| latitude | 51.346176 |
+| geometry | POINT (-2.250094 51.346176) |
 
+#### Find a postcode by point
 
 It is also possible to reverse geocode and find the postcode and associated ONS data for a given point. It's important to note that as the ONS postcode lookup is best fit, the results may not be 100% accurate for the given point. The following query uses the date_of_termination field to filter out postcodes that are no longer in use.
 
@@ -97,4 +129,12 @@ FROM vw_postcodes
 WHERE ST_Within(geometry, ST_Buffer(ST_Point(-2.250, 51.346), 0.01))
 AND date_of_termination IS NULL
 ORDER BY distance ASC LIMIT 1;
+```
+
+#### Find multiple postcodes
+
+You can also find multiple postcodes by using the `IN` clause.
+
+```sql
+SELECT * FROM vw_postcodes where replace(postcode, ' ', '') IN ('BA151DS', 'BA151DT');
 ```
