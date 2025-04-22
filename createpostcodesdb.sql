@@ -2,7 +2,7 @@ INSTALL spatial;
 LOAD spatial;
 
 CREATE TABLE postcode (
-    postcode VARCHAR PRIMARY KEY UNIQUE,
+    postcode VARCHAR PRIMARY KEY,
     date_of_termination VARCHAR,
     county_code VARCHAR,
     county_electoral_division_code VARCHAR,
@@ -72,7 +72,7 @@ FROM read_parquet('data/bua24-codes.parquet');
 
 -- create a table for the countries
 CREATE TABLE country (
-    code VARCHAR PRIMARY KEY UNIQUE,
+    code VARCHAR PRIMARY KEY,
     name VARCHAR
 );
 
@@ -83,7 +83,7 @@ FROM read_parquet('data/country-codes.parquet');
 
 -- create a table for the counties
 CREATE TABLE county (
-    code VARCHAR PRIMARY KEY UNIQUE,
+    code VARCHAR PRIMARY KEY,
     name VARCHAR
 );
 
@@ -95,7 +95,7 @@ FROM read_parquet('data/county-codes.parquet');
 
 -- create a table for the county electoral divisions
 CREATE TABLE county_electoral_division (
-    code VARCHAR PRIMARY KEY UNIQUE,
+    code VARCHAR PRIMARY KEY,
     name VARCHAR
 );
 
@@ -106,7 +106,7 @@ FROM read_parquet('data/ced-codes.parquet');
 
 -- create a table for the local authority districts
 CREATE TABLE local_authority_district (
-    code VARCHAR PRIMARY KEY UNIQUE,
+    code VARCHAR PRIMARY KEY,
     name VARCHAR
 );
 
@@ -118,7 +118,7 @@ FROM read_parquet('data/la-ua-codes.parquet');
 
 -- create a table for the regions
 CREATE TABLE region (
-    code VARCHAR PRIMARY KEY UNIQUE,
+    code VARCHAR PRIMARY KEY,
     name VARCHAR
 );
 
@@ -130,7 +130,7 @@ FROM read_parquet('data/region-codes.parquet');
 
 -- create a table for the Rural Urban (2011) Indicators
 CREATE TABLE rural_urban_11_indicator (
-    indicator VARCHAR PRIMARY KEY UNIQUE,
+    indicator VARCHAR PRIMARY KEY,
     name VARCHAR
 );
 
@@ -142,7 +142,7 @@ FROM read_parquet('data/ru11-codes.parquet');
 
 -- create a table for the Westminster Parliamentary Constituencies
 CREATE TABLE westminster_parliamentary_constituency (
-    code VARCHAR PRIMARY KEY UNIQUE,
+    code VARCHAR PRIMARY KEY,
     name VARCHAR
 );
 
@@ -154,7 +154,7 @@ FROM read_parquet('data/pcon-codes.parquet');
 
 -- create a table for the wards
 CREATE TABLE ward (
-    code VARCHAR PRIMARY KEY UNIQUE,
+    code VARCHAR PRIMARY KEY,
     name VARCHAR
 );
 
