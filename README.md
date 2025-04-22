@@ -82,40 +82,40 @@ SELECT * FROM vw_postcodes where replace(postcode, ' ', '') = 'BA151DS';
 
 The results of the above query would be:
 
-| Column Name | Value |
-| --- | --- |
-| postcode | BA15 1DS |
-| date_of_termination | |
-| county_code | E99999999 |
-| county_name | (pseudo) England (UA/MD/LB) |
-| county_electoral_division_code | E99999999
-| county_electoral_division_name | | 
-| local_authority_district_code | E06000054 |
-| local_authority_district_name | Wiltshire |
-| ward_code | E05013407 |
-| ward_name | Bradford-on-Avon South |
-| easting | 382678 |
-| northing | 160818 |
-| country_code | E92000001 |
-| country_name | England |
-| region_code | E12000009 |
-| region_name | South West |
-| westminster_parliamentary_constituency_code | E14001356 |
-| westminster_parliamentary_constituency_name | Melksham and Devizes |
-| output_area_11_code | E00163467 |
-| lower_super_output_area_11_code | E01032050 |
-| middle_super_output_area_11_code | E02006682 |
-| built_up_area_24_code | E63012462 |
-| built_up_area_name | Bradford-on-Avon |
-| rural_urban_11_code | D1 |
-| rural_urban_11_name | (England/Wales) Rural town and fringe |
-| index_multiple_deprivation_rank | 27325 |
-| output_area_21_code | E00163467 |
-| lower_super_output_area_21_code | E01034532 |
-| middle_super_output_area_21_code | E02006682 |
-| longitude | -2.250094 |
-| latitude | 51.346176 |
-| geometry | POINT (-2.250094 51.346176) |
+| Column Name                                 | Value                                 |
+| ------------------------------------------- | ------------------------------------- |
+| postcode                                    | BA15 1DS                              |
+| date_of_termination                         |                                       |
+| county_code                                 | E99999999                             |
+| county_name                                 | (pseudo) England (UA/MD/LB)           |
+| county_electoral_division_code              | E99999999                             |
+| county_electoral_division_name              |                                       |
+| local_authority_district_code               | E06000054                             |
+| local_authority_district_name               | Wiltshire                             |
+| ward_code                                   | E05013407                             |
+| ward_name                                   | Bradford-on-Avon South                |
+| easting                                     | 382678                                |
+| northing                                    | 160818                                |
+| country_code                                | E92000001                             |
+| country_name                                | England                               |
+| region_code                                 | E12000009                             |
+| region_name                                 | South West                            |
+| westminster_parliamentary_constituency_code | E14001356                             |
+| westminster_parliamentary_constituency_name | Melksham and Devizes                  |
+| output_area_11_code                         | E00163467                             |
+| lower_super_output_area_11_code             | E01032050                             |
+| middle_super_output_area_11_code            | E02006682                             |
+| built_up_area_24_code                       | E63012462                             |
+| built_up_area_name                          | Bradford-on-Avon                      |
+| rural_urban_11_code                         | D1                                    |
+| rural_urban_11_name                         | (England/Wales) Rural town and fringe |
+| index_multiple_deprivation_rank             | 27325                                 |
+| output_area_21_code                         | E00163467                             |
+| lower_super_output_area_21_code             | E01034532                             |
+| middle_super_output_area_21_code            | E02006682                             |
+| longitude                                   | -2.250094                             |
+| latitude                                    | 51.346176                             |
+| geometry                                    | POINT (-2.250094 51.346176)           |
 
 #### Find a postcode by point
 
