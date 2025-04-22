@@ -2,7 +2,7 @@ INSTALL spatial;
 LOAD spatial;
 
 CREATE TABLE postcode (
-    postcode VARCHAR,
+    postcode VARCHAR PRIMARY KEY UNIQUE,
     date_of_termination VARCHAR,
     county_code VARCHAR,
     county_electoral_division_code VARCHAR,
@@ -28,7 +28,7 @@ CREATE TABLE postcode (
 
 -- Load the data from the parquet file into the postcodes table
 INSERT INTO postcode
-SELECT pcd as postcode,
+SELECT replace(pcd, ' '::VARCHAR, ''::VARCHAR) as postcode,
        doterm as date_of_termination,
        oscty as county_code,
        ced as county_electoral_division_code,
@@ -72,7 +72,7 @@ FROM read_parquet('data/bua24-codes.parquet');
 
 -- create a table for the countries
 CREATE TABLE country (
-    code VARCHAR,
+    code VARCHAR PRIMARY KEY UNIQUE,
     name VARCHAR
 );
 
@@ -83,7 +83,7 @@ FROM read_parquet('data/country-codes.parquet');
 
 -- create a table for the counties
 CREATE TABLE county (
-    code VARCHAR,
+    code VARCHAR PRIMARY KEY UNIQUE,
     name VARCHAR
 );
 
@@ -95,7 +95,7 @@ FROM read_parquet('data/county-codes.parquet');
 
 -- create a table for the county electoral divisions
 CREATE TABLE county_electoral_division (
-    code VARCHAR,
+    code VARCHAR PRIMARY KEY UNIQUE,
     name VARCHAR
 );
 
@@ -106,7 +106,7 @@ FROM read_parquet('data/ced-codes.parquet');
 
 -- create a table for the local authority districts
 CREATE TABLE local_authority_district (
-    code VARCHAR,
+    code VARCHAR PRIMARY KEY UNIQUE,
     name VARCHAR
 );
 
@@ -118,7 +118,7 @@ FROM read_parquet('data/la-ua-codes.parquet');
 
 -- create a table for the regions
 CREATE TABLE region (
-    code VARCHAR,
+    code VARCHAR PRIMARY KEY UNIQUE,
     name VARCHAR
 );
 
@@ -130,7 +130,7 @@ FROM read_parquet('data/region-codes.parquet');
 
 -- create a table for the Rural Urban (2011) Indicators
 CREATE TABLE rural_urban_11_indicator (
-    indicator VARCHAR,
+    indicator VARCHAR PRIMARY KEY UNIQUE,
     name VARCHAR
 );
 
@@ -142,7 +142,7 @@ FROM read_parquet('data/ru11-codes.parquet');
 
 -- create a table for the Westminster Parliamentary Constituencies
 CREATE TABLE westminster_parliamentary_constituency (
-    code VARCHAR,
+    code VARCHAR PRIMARY KEY UNIQUE,
     name VARCHAR
 );
 
@@ -154,7 +154,7 @@ FROM read_parquet('data/pcon-codes.parquet');
 
 -- create a table for the wards
 CREATE TABLE ward (
-    code VARCHAR,
+    code VARCHAR PRIMARY KEY UNIQUE,
     name VARCHAR
 );
 
